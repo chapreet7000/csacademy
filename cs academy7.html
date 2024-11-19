@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Academy</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+        header {
+            background-color: #FF6347;
+            color: white;
+            padding: 40px 0;
+            width: 100%;
+            text-align: center;
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h2 {
+            font-size: 2.2em;
+            color: #FF6347;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 10px;
+        }
+        input, button {
+            padding: 15px;
+            font-size: 1.3em;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+            outline: none;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #FF6347;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #FF4500;
+        }
+        .hidden {
+            display: none;
+        }
+        .chapter-box-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .chapter-box {
+            padding: 15px;
+            background-color: #FF6347;
+            color: white;
+            font-size: 1.1em;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-sizing: border-box;
+        }
+        .chapter-box:hover {
+            transform: scale(1.05);
+            background-color: #FF4500;
+        }
+        .chapter-box:active {
+            transform: scale(1);
+        }
+        footer {
+            margin-top: 30px;
+            background-color: #FF6347;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>WELCOME TO CS ACADEMY</header>
+
+<!-- Page 1: User Information Form -->
+<div id="formPage" class="container">
+    <h2>Enter Your Information</h2>
+    <form id="infoForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="class">Class:</label>
+        <input type="text" id="class" name="class" required>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<!-- Page 2: Thank You Message -->
+<div id="secondPage" class="container hidden">
+    <h2>Hi <span id="userName"></span>, Thanks for logging in!</h2>
+    <p>Please click the button to continue to the password page.</p>
+    <button id="okButton" onclick="showPasswordPage()">OK</button>
+</div>
+
+<!-- Page 3: Password Page -->
+<div id="passwordPage" class="container hidden">
+    <h2>Enter Password</h2>
+    <input type="password" id="password" placeholder="Enter password" required>
+    <button onclick="checkPassword()">Submit</button>
+    <p id="errorMessage" style="color: red; font-size: 1.2em;"></p>
+</div>
+
+<!-- Page 4: Success Message -->
+<div id="fourthPage" class="container hidden">
+    <h2>Congratulations, You have access!</h2>
+    <p>Welcome to the CS Academy members-only area.</p>
+    <button onclick="showMemberArea()">Go to Member Area</button>
+</div>
+
+<!-- Page 5: Member Area -->
+<div id="fifthPage" class="container hidden">
+    <h2>You're now a CS Academy Member!</h2>
+    <div class="chapter-box-container">
+        <button class="chapter-box" onclick="showSubjectSelection()">NOTES</button>
+        <button class="chapter-box" onclick="showSubjectSelection()">SAMPLE PAPERS</button>
+        <button class="chapter-box" onclick="showSubjectSelection()">TESTS</button>
+        <button class="chapter-box" onclick="showSubjectSelection()">SYLLABUS</button>
+        <button class="chapter-box" onclick="showSubjectSelection()">HELP AND SUPPORT</button>
+    </div>
+</div>
+
+<!-- Page 6: Subject Selection -->
+<div id="subjectSelectionPage" class="container hidden">
+    <h2>Select a Subject</h2>
+    <div class="chapter-box-container">
+        <button class="chapter-box" onclick="showAccountancyChapters()">Accountancy</button>
+        <button class="chapter-box" onclick="showEconomicsChapters()">Economics</button>
+        <button class="chapter-box" onclick="showBusinessStudiesChapters()">Business Studies</button>
+    </div>
+    <button onclick="backToMemberArea()">Back to Member Area</button>
+</div>
+
+<!-- Page 7: Accountancy Chapters -->
+<div id="accountancyChaptersPage" class="container hidden">
+    <h2>Accountancy Class 11 - Chapters</h2>
+    <div class="chapter-box-container">
+        <button class="chapter-box" onclick="showAccountingIntroduction()">Chapter 1: Introduction to Accounting</button>
+        <button class="chapter-box">Chapter 2: Theory Base of Accounting</button>
+        <button class="chapter-box">Chapter 3: Recording of Transactions</button>
+        <button class="chapter-box">Chapter 4: Bank Reconciliation Statement</button>
+        <button class="chapter-box">Chapter 5: Inventories</button>
+        <!-- More chapters... -->
+    </div>
+    <button onclick="backToSubjectSelection()">Back to Subject Selection</button>
+</div>
+
+<!-- Page for Introduction to Accounting (PDF) -->
+<div id="accountingIntroductionPage" class="container hidden">
+    <h2>Introduction to Accounting</h2>
+    <p>Below is the PDF of the Introduction to Accounting. You can scroll through it.</p>
+    <iframe src="https://drive.google.com/file/d/11OLgDu9Sdy_NUde_T5qo28xfJt5Ztulb/preview" width="100%" height="600px"></iframe>
+    <button onclick="backToSubjectSelection()">Back to Subject Selection</button>
+</div>
+
+<!-- Page 8: Economics Chapters -->
+<div id="economicsChaptersPage" class="container hidden">
+    <h2>Economics Class 11 - Chapters</h2>
+    <div class="chapter-box-container">
+        <button class="chapter-box">Chapter 1: Introduction to Economics</button>
+        <button class="chapter-box">Chapter 2: Theory of Consumer Behavior</button>
+        <button class="chapter-box">Chapter 3: Producer Behavior and Supply</button>
+        <button class="chapter-box">Chapter 4: Forms of Market</button>
+        <button class="chapter-box">Chapter 5: National Income Accounting</button>
+        <button class="chapter-box">Chapter 6: Money and Banking</button>
+        <button class="chapter-box">Chapter 7: Determination of Income and Employment</button>
+        <button class="chapter-box">Chapter 8: Government Budget and the Economy</button>
+        <button class="chapter-box">Chapter 9: Balance of Payments</button>
+        <button class="chapter-box">Chapter 10: Development Experience</button>
+    </div>
+    <button onclick="backToSubjectSelection()">Back to Subject Selection</button>
+</div>
+
+<!-- Page 9: Business Studies Chapters -->
+<div id="businessStudiesChaptersPage" class="container hidden">
+    <h2>Business Studies Class 11 - Chapters</h2>
+    <div class="chapter-box-container">
+        <button class="chapter-box">Chapter 1: Nature and Significance of Management</button>
+        <button class="chapter-box">Chapter 2: Principles of Management</button>
+        <button class="chapter-box">Chapter 3: Business Environment</button>
+        <button class="chapter-box">Chapter 4: Planning</button>
+        <button class="chapter-box">Chapter 5: Organizing</button>
+        <button class="chapter-box">Chapter 6: Staffing</button>
+        <button class="chapter-box">Chapter 7: Directing</button>
+        <button class="chapter-box">Chapter 8: Controlling</button>
+    </div>
+    <button onclick="backToSubjectSelection()">Back to Subject Selection</button>
+</div>
+
+<footer>CS Academy © 2024</footer>
+
+<script>
+// Page 1 (Form) to Page 2 (Thank You) navigation
+document.getElementById("infoForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const name = document.getElementById("name").value;
+    document.getElementById("userName").textContent = name;
+    document.getElementById("formPage").classList.add("hidden");
+    document.getElementById("secondPage").classList.remove("hidden");
+});
+
+// Show password page
+function showPasswordPage() {
+    document.getElementById("secondPage").classList.add("hidden");
+    document.getElementById("passwordPage").classList.remove("hidden");
+}
+
+// Check Password
+function checkPassword() {
+    const password = document.getElementById("password").value;
+    if (password === "1234") { // Correct password
+        document.getElementById("passwordPage").classList.add("hidden");
+        document.getElementById("fourthPage").classList.remove("hidden");
+    } else { // Incorrect password
+        document.getElementById("errorMessage").textContent = "Incorrect Password, please try again.";
+    }
+}
+
+// Navigate to member area
+function showMemberArea() {
+    document.getElementById("fourthPage").classList.add("hidden");
+    document.getElementById("fifthPage").classList.remove("hidden");
+}
+
+// Show subject selection page
+function showSubjectSelection() {
+    document.getElementById("fifthPage").classList.add("hidden");
+    document.getElementById("subjectSelectionPage").classList.remove("hidden");
+}
+
+// Back to member area
+function backToMemberArea() {
+    document.getElementById("subjectSelectionPage").classList.add("hidden");
+    document.getElementById("fifthPage").classList.remove("hidden");
+}
+
+// Accountancy Chapters Page
+function showAccountancyChapters() {
+    document.getElementById("subjectSelectionPage").classList.add("hidden");
+    document.getElementById("accountancyChaptersPage").classList.remove("hidden");
+}
+
+// Back to subject selection from Accountancy Chapters
+function backToSubjectSelection() {
+    document.getElementById("accountancyChaptersPage").classList.add("hidden");
+    document.getElementById("subjectSelectionPage").classList.remove("hidden");
+}
+
+// Show Introduction to Accounting
+function showAccountingIntroduction() {
+    document.getElementById("accountancyChaptersPage").classList.add("hidden");
+    document.getElementById("accountingIntroductionPage").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
